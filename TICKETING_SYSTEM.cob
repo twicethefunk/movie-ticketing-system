@@ -1,5 +1,10 @@
+      ******************************************************************
+      * Authors: Borabon, Datur, Mananquil, Pronto                      *
+      * Date: March 2, 2021                                             *
+      * System Title: Movie Ticket Reservation System                   *
+      *******************************************************************
        IDENTIFICATION DIVISION.
-       PROGRAM-ID. CUSTOMER.
+       PROGRAM-ID. MOVIE-TICKET-RESERVATION.
        ENVIRONMENT DIVISION.
        INPUT-OUTPUT SECTION.
        FILE-CONTROL.
@@ -57,250 +62,251 @@
        FILE SECTION.
        FD  FD-ADMIN.
        01  FA-ACCOUNT.
-           05 FA-ACCID     PIC 9(10).
+           05 FA-ACCID             PIC 9(10).
            05 FA-NAME.
-               10 FA-FNAME PIC X(10).
-               10 FA-LNAME PIC X(10).
-           05 FA-PASSCODE  PIC 9(4).
+               10 FA-FNAME         PIC X(10).
+               10 FA-LNAME         PIC X(10).
+           05 FA-PASSCODE          PIC 9(4).
 
        FD  FD-EMPLOYEES.
        01  FE-ACCOUNT.
-           05 FE-ACCID     PIC 9(10).
+           05 FE-ACCID             PIC 9(10).
            05 FE-NAME.
-               10 FE-FNAME PIC X(10).
-               10 FE-LNAME PIC X(10).
-           05 FE-PASSCODE  PIC X(6).
-           05 FE-POSITION  PIC 99.
+               10 FE-FNAME         PIC X(10).
+               10 FE-LNAME         PIC X(10).
+           05 FE-PASSCODE          PIC X(6).
+           05 FE-POSITION          PIC 99.
 
        FD  FD-MOVIES.
        01  FM-RECORD.
-           05 FM-MOVIECODE PIC 9(4).
-           05 FM-TITLE     PIC X(30).
-           05 FM-RDATE     PIC X(4).
-           05 FM-RATINGS   PIC X(3).
-           05 FM-SYNOPSIS  PIC X(800).
+           05 FM-MOVIECODE         PIC 9(4).
+           05 FM-TITLE             PIC X(30).
+           05 FM-RDATE             PIC X(4).
+           05 FM-RATINGS           PIC X(3).
+           05 FM-SYNOPSIS          PIC X(800).
 
        FD  FD-LAYOUT.
        01  C-LAYOUT.
-           05 SEAT-KEY  PIC 9.
-           05 COL0     PIC X.
-           05 COL1     PIC X.
-           05 COL2     PIC X.
-           05 COL3     PIC X.
-           05 COL4     PIC X.
-           05 COL5     PIC X.
-           05 COL6     PIC X.
-           05 COL7     PIC X.
-           05 COL8     PIC X.
-           05 COL9     PIC X.
+           05 SEAT-KEY             PIC 9.
+           05 COL0                 PIC X.
+           05 COL1                 PIC X.
+           05 COL2                 PIC X.
+           05 COL3                 PIC X.
+           05 COL4                 PIC X.
+           05 COL5                 PIC X.
+           05 COL6                 PIC X.
+           05 COL7                 PIC X.
+           05 COL8                 PIC X.
+           05 COL9                 PIC X.
 
        FD  FD-LAYOUT1.
        01  C-LAYOUT1.
-           05 SEAT-KEY1  PIC 9.
-           05 COL01     PIC X.
-           05 COL11     PIC X.
-           05 COL21     PIC X.
-           05 COL31     PIC X.
-           05 COL41     PIC X.
-           05 COL51     PIC X.
-           05 COL61     PIC X.
-           05 COL71     PIC X.
-           05 COL81     PIC X.
-           05 COL91     PIC X.
+           05 SEAT-KEY1            PIC 9.
+           05 COL01                PIC X.
+           05 COL11                PIC X.
+           05 COL21                PIC X.
+           05 COL31                PIC X.
+           05 COL41                PIC X.
+           05 COL51                PIC X.
+           05 COL61                PIC X.
+           05 COL71                PIC X.
+           05 COL81                PIC X.
+           05 COL91                PIC X.
 
        FD  FD-RESERVEDSEAT.
        01  C-RESERVEDSEAT.
-           05 SEATID PIC 9(4).
-           05 CUSTOMER-ID PIC 9(10).
-           05 MOVIE-ID  PIC 9(4).
-           05 MOVIE-TITLE PIC X(30).
-           05 CINEMA-NUM PIC 9.
-           05 LAYOUT-NUM PIC 9.
-           05 SEATNUMBER PIC X.
-           05 TIME-RESERVED PIC XXXXXXXX.
-           05 DATE-RESERVED PIC X(10).
-           05 RESERVE-STATUS PIC X(6).
+           05 SEATID               PIC 9(4).
+           05 CUSTOMER-ID          PIC 9(10).
+           05 MOVIE-ID             PIC 9(4).
+           05 MOVIE-TITLE          PIC X(30).
+           05 CINEMA-NUM           PIC 9.
+           05 LAYOUT-NUM           PIC 9.
+           05 SEATNUMBER           PIC X.
+           05 TIME-RESERVED        PIC XXXXXXXX.
+           05 DATE-RESERVED        PIC X(10).
+           05 RESERVE-STATUS       PIC X(6).
 
        FD  FD-CUSTOMER.
        01  C-ACCOUNT.
-           05 C-ACCID     PIC 9(10).
+           05 C-ACCID              PIC 9(10).
            05 C-NAME.
-               10 FC-FNAME PIC X(10).
-               10 FC-LNAME PIC X(10).
-           05 C-PHONENUM PIC 9(11).
-           05 C-USERNAME PIC X(10).
-           05 C-PASSCODE  PIC X(8).
-           05 C-RESERVED PIC 9.
-           01 ALT-KEY PIC X(10).
+               10 FC-FNAME         PIC X(10).
+               10 FC-LNAME         PIC X(10).
+           05 C-PHONENUM           PIC 9(11).
+           05 C-USERNAME           PIC X(10).
+           05 C-PASSCODE           PIC X(8).
+           05 C-RESERVED           PIC 9.
+           01 ALT-KEY              PIC X(10).
 
        FD  FD-USERNAME-DETECT.
        01  D-ACCOUNT.
-           05 D-ACCID     PIC 9(10).
+           05 D-ACCID              PIC 9(10).
            05 D-NAME.
-               10 FAD-FNAME PIC X(10).
-               10 FAD-LNAME PIC X(10).
-           05 D-PHONENUM PIC 9(11).
-           05 D-USERNAME PIC X(10).
-           05 D-PASSCODE  PIC X(8).
-           05 D-RESERVED PIC 9.
-           01 D-ALT-KEY PIC X(10).
+               10 FAD-FNAME        PIC X(10).
+               10 FAD-LNAME        PIC X(10).
+           05 D-PHONENUM           PIC 9(11).
+           05 D-USERNAME           PIC X(10).
+           05 D-PASSCODE           PIC X(8).
+           05 D-RESERVED           PIC 9.
+           01 D-ALT-KEY            PIC X(10).
 
        WORKING-STORAGE SECTION.
       *----AUTO CREATE DATABASE----
-       01 WS-KEY-COUNTER PIC 9 VALUE 1.
+       01 WS-KEY-COUNTER           PIC 9 VALUE 1.
        01 WS-LAYOUT-CREATE.
-           05 WS-SEAT-KEY-1  PIC 9.
-           05 WS-COL-LAYOUT     PIC X VALUE "*".
-           05 WS-COL1-LAYOUT     PIC X VALUE "*".
-           05 WS-COL2-LAYOUT     PIC X VALUE "*".
-           05 WS-COL3-LAYOUT     PIC X VALUE "*".
-           05 WS-COL4-LAYOUT     PIC X VALUE "*".
-           05 WS-COL5-LAYOUT     PIC X VALUE "*".
-           05 WS-COL6-LAYOUT     PIC X VALUE "*".
-           05 WS-COL7-LAYOUT     PIC X VALUE "*".
-           05 WS-COL8-LAYOUT     PIC X VALUE "*".
-           05 WS-COL9-LAYOUT     PIC X VALUE "*".
+           05 WS-SEAT-KEY-1        PIC 9.
+           05 WS-COL-LAYOUT        PIC X VALUE "*".
+           05 WS-COL1-LAYOUT       PIC X VALUE "*".
+           05 WS-COL2-LAYOUT       PIC X VALUE "*".
+           05 WS-COL3-LAYOUT       PIC X VALUE "*".
+           05 WS-COL4-LAYOUT       PIC X VALUE "*".
+           05 WS-COL5-LAYOUT       PIC X VALUE "*".
+           05 WS-COL6-LAYOUT       PIC X VALUE "*".
+           05 WS-COL7-LAYOUT       PIC X VALUE "*".
+           05 WS-COL8-LAYOUT       PIC X VALUE "*".
+           05 WS-COL9-LAYOUT       PIC X VALUE "*".
        *>ADMIN
        01 WSA-ACCOUNT.
-           05 WSA-ACCID     PIC 9(10).
+           05 WSA-ACCID            PIC 9(10).
            05 WSA-NAME.
-               10 WSA-FNAME PIC X(10).
-               10 WSA-LNAME PIC X(10).
-           05 WSA-PASSCODE  PIC X(6).
-           05 WSA-POSITION  PIC 99.
+               10 WSA-FNAME        PIC X(10).
+               10 WSA-LNAME        PIC X(10).
+           05 WSA-PASSCODE         PIC X(6).
+           05 WSA-POSITION         PIC 99.
 
-       01 WS-DECISION      PIC 9.
+       01 WS-DECISION              PIC 9.
 
        01 WS-MCODE.
-           05 WS-MIN       PIC 9(4) VALUE 7.
-           05 WS-MAX       PIC 9(4) VALUE 2013.
-           05 WS-CODE      PIC 9(4).
+           05 WS-MIN               PIC 9(4) VALUE 7.
+           05 WS-MAX               PIC 9(4) VALUE 2013.
+           05 WS-CODE              PIC 9(4).
 
        *>CUSTOMER
        01  CUSTOMER-CURRENT-TICKET PIC 9.
-       01  SEAT-PROCEED PIC X.
-       01  DEFAULT-STATUS PIC X(6) VALUES "UNPAID".
-       01  IS-VALID-CHOICE-HOME PIC X.
-       01  WS-MOVIE-ID-SELECTED PIC 9(4).
+       01  SEAT-PROCEED            PIC X.
+       01  DEFAULT-STATUS          PIC X(6) VALUES "UNPAID".
+       01  IS-VALID-CHOICE-HOME    PIC X.
+       01  WS-MOVIE-ID-SELECTED    PIC 9(4).
       *----FOR SEAT RESERVATION----
        01  WS-RESERVEDSEAT.
-           05 WS-SEATID PIC 9(4).
-           05 WS-CUSTOMER-ID PIC 9(10).
-           05 WS-MOVIE-ID  PIC 9(4).
-           05 WS-MOVIE-TITLE PIC X(30).
-           05 WS-CINEMA-NUM PIC 9.
-           05 WS-LAYOUT-NUM PIC 9.
-           05 WS-SEATNUMBER PIC X.
-           05 WS-TIME-RESERVED PIC XXXXXXXX.
-           05 WS-DATE-RESERVED PIC X(10).
-           05 WS-RESERVE-STATUS PIC X(6).
+           05 WS-SEATID            PIC 9(4).
+           05 WS-CUSTOMER-ID       PIC 9(10).
+           05 WS-MOVIE-ID          PIC 9(4).
+           05 WS-MOVIE-TITLE       PIC X(30).
+           05 WS-CINEMA-NUM        PIC 9.
+           05 WS-LAYOUT-NUM        PIC 9.
+           05 WS-SEATNUMBER        PIC X.
+           05 WS-TIME-RESERVED     PIC XXXXXXXX.
+           05 WS-DATE-RESERVED     PIC X(10).
+           05 WS-RESERVE-STATUS    PIC X(6).
       *------------------------------
        01  STOPER PIC X.
-       01  CUSTOMER-CHOOSE-MOVIE PIC 9.
-       01  NOW-SHOWING-COUNT PIC 9 VALUE 1.
-       01  SEAT-VALID PIC X.
-       01  WS-MOVIE-INPUT PIC 9(4).
+       01  CUSTOMER-CHOOSE-MOVIE   PIC 9.
+       01  NOW-SHOWING-COUNT       PIC 9 VALUE 1.
+       01  SEAT-VALID              PIC X.
+       01  WS-MOVIE-INPUT          PIC 9(4).
       *----FOR DISPLAYING MOVIES----
        01  WS-MOVIES.
-           05 WS-MOVIECODE PIC 9(4).
-           05 WS-TITLE     PIC X(30) VALUE SPACES.
-           05 WS-RDATE     PIC X(4).
-           05 WS-RATINGS   PIC X(3).
-           05 WS-SYNOPSIS  PIC X(800) VALUE SPACES.
+           05 WS-MOVIECODE         PIC 9(4).
+           05 WS-TITLE             PIC X(30) VALUE SPACES.
+           05 WS-RDATE             PIC X(4).
+           05 WS-RATINGS           PIC X(3).
+           05 WS-SYNOPSIS          PIC X(800) VALUE SPACES.
       *----FOR DISPLAYING SEAT LAYOUT----
        01  WS-LAYOUT.
-           05 WS-SEAT-KEY  PIC 9.
-           05 WS-COL0     PIC X.
-           05 WS-COL1     PIC X.
-           05 WS-COL2     PIC X.
-           05 WS-COL3     PIC X.
-           05 WS-COL4     PIC X.
-           05 WS-COL5     PIC X.
-           05 WS-COL6     PIC X.
-           05 WS-COL7     PIC X.
-           05 WS-COL8     PIC X.
-           05 WS-COL9     PIC X.
+           05 WS-SEAT-KEY          PIC 9.
+           05 WS-COL0              PIC X.
+           05 WS-COL1              PIC X.
+           05 WS-COL2              PIC X.
+           05 WS-COL3              PIC X.
+           05 WS-COL4              PIC X.
+           05 WS-COL5              PIC X.
+           05 WS-COL6              PIC X.
+           05 WS-COL7              PIC X.
+           05 WS-COL8              PIC X.
+           05 WS-COL9              PIC X.
       *----VARIABLES FOR INPUT IN LOGIN----
-           01 INPUT-USERNAME PIC X(10).
-           01 INPUT-PASSCODE PIC X(8).
-           01 REXIST PIC X.
+           01 INPUT-USERNAME       PIC X(10).
+           01 INPUT-PASSCODE       PIC X(8).
+           01 REXIST               PIC X.
            01 WS-ACCOUNT-1.
-               05 WS-ACCID1     PIC 9(10).
+               05 WS-ACCID1        PIC 9(10).
                05 WS-NAME.
-                   10 WS-FNAME1 PIC X(10).
-                   10 WS-LNAME1 PIC X(10).
+                   10 WS-FNAME1    PIC X(10).
+                   10 WS-LNAME1    PIC X(10).
                05 WS-PHONENUMBER1  PIC 9(11).
-               05 WS-USERNAME1  PIC X(10).
-               05 WS-PASSCODE1  PIC X(8).
-               05 WS-RESERVED1 PIC 9.
+               05 WS-USERNAME1     PIC X(10).
+               05 WS-PASSCODE1     PIC X(8).
+               05 WS-RESERVED1     PIC 9.
            01 WS-ACCOUNT.
-               05 WS-ACCID     PIC 9(10).
+               05 WS-ACCID         PIC 9(10).
                05 WS-NAME.
-                   10 WS-FNAME PIC X(10).
-                   10 WS-LNAME PIC X(10).
-               05 WS-PHONENUMBER  PIC 9(11).
-               05 WS-USERNAME  PIC X(10).
-               05 WS-PASSCODE  PIC X(8).
-               05 WS-RESERVED PIC 9.
-           01 WS-FILESTATUS  PIC XX.
-           01 WS-MENU-CHOICE PIC X.
-           01 WS-CHOICE PIC X.
+                   10 WS-FNAME     PIC X(10).
+                   10 WS-LNAME     PIC X(10).
+               05 WS-PHONENUMBER   PIC 9(11).
+               05 WS-USERNAME      PIC X(10).
+               05 WS-PASSCODE      PIC X(8).
+               05 WS-RESERVED      PIC 9.
+           01 WS-FILESTATUS        PIC XX.
+           01 WS-MENU-CHOICE       PIC X.
+           01 WS-CHOICE            PIC X.
 
            01 WS-GENERATE-DATA.
            05  WS-DATE.
-               10 WS-YEAR         PIC 9(04).
-               10 WS-MONTH        PIC 9(02).
+               10 WS-YEAR          PIC 9(04).
+               10 WS-MONTH         PIC 9(02).
            05  WS-TIME.
-               10 WS-DAY          PIC 9(02).
-               10 WS-HOURS        PIC 9(02).
-               10 WS-MINUTE       PIC 9(02).
-               10 WS-SECOND       PIC 9(02).
-               10 WS-MILLISECONDS PIC 9(02).
-           01 WS-PASSCODE-TEMP PIC 9(4).
-           01 WS-FLAG          PIC 9.
-           01 WS-EOF PIC X.
-           01 HOME-CHOICE PIC X.
-           01 SEAT-COUNTS PIC 99.
-           01 SEAT-INPUT PIC XX.
-           01 SEAT-KEY-INPUT PIC X.
-           01 SEAT-NUMBER-INPUT PIC X.
+               10 WS-DAY           PIC 9(02).
+               10 WS-HOURS         PIC 9(02).
+               10 WS-MINUTE        PIC 9(02).
+               10 WS-SECOND        PIC 9(02).
+               10 WS-MILLISECONDS  PIC 9(02).
+           01 WS-PASSCODE-TEMP     PIC 9(4).
+           01 WS-FLAG              PIC 9.
+           01 WS-EOF               PIC X.
+           01 HOME-CHOICE          PIC X.
+           01 SEAT-COUNTS          PIC 99.
+           01 SEAT-INPUT           PIC XX.
+           01 SEAT-KEY-INPUT       PIC X.
+           01 SEAT-NUMBER-INPUT    PIC X.
            01 DATE-ID.
-              05 YEAR PIC 9(4).
-              05 MONTH PIC 99.
-              05 DAYY PIC 99.
+              05 YEAR              PIC 9(4).
+              05 MONTH             PIC 99.
+              05 DAYY              PIC 99.
       *----VARIABLES FOR TIME AND DATE----
-       01  ORIGINAL-DATE PIC XXXX/XX/XXBXX/XX.
-       01  DATER PIC XXXXXXXXXX.
-       01  TIMER PIC XXXXXX.
-       01  HOUR PIC 99.
-       01  MIN PIC 99.
-       01  HOUR-TO-AM PIC 99.
-       01  AM-OR-PM PIC XX.
-       01  STANDARD-TIME PIC 99 VALUE 12.
-       01  TIME-STRINGER PIC XXXXXXXX.
+       01  ORIGINAL-DATE           PIC XXXX/XX/XXBXX/XX.
+       01  DATER                   PIC XXXXXXXXXX.
+       01  TIMER                   PIC XXXXXX.
+       01  HOUR                    PIC 99.
+       01  MIN                     PIC 99.
+       01  HOUR-TO-AM              PIC 99.
+       01  AM-OR-PM                PIC XX.
+       01  STANDARD-TIME           PIC 99 VALUE 12.
+       01  TIME-STRINGER           PIC XXXXXXXX.
       *----------------------------------
-       01  DEFAULTID PIC 9(4).
-       01  FINAL-SEAT-ID PIC 9(11).
-       01  AVAILABLE-SEAT-ONE PIC 99.
-       01  AVAILABLE-SEAT-TWO PIC 99.
-       01  LOGIN-SUCCESS PIC X.
-       01  RESERVE-ID-INPUT PIC 9(4).
-       01  RESERVATION-VALID PIC X.
-       01  IS-PROCEED PIC 9.
-       01  IS-PROCEED-EVAL PIC X.
-       01  CORRECT-ID PIC X.
-       01  VIEW-RESERVE-BACK PIC 9.
-       01  RESERVE-CONFIRM PIC 9.
-       01  RESERVE-STOP PIC X.
-       01  RESERVE-CONFIRM2 PIC 9.
-       01  RESERVE-STOP2 PIC X.
-       01  SELECT-REFRESH PIC X.
-       01  SELECT-VIEW PIC X.
-       01  YES-PAID PIC X.
-       01  YES-UNPAID PIC X.
-       01  REGISTER-CHECK PIC X.
-       01  LOGIN-HAVE-DATA PIC 9.
-       01  WS-ECHOICE PIC 9.
+       01  DEFAULTID               PIC 9(4).
+       01  FINAL-SEAT-ID           PIC 9(11).
+       01  AVAILABLE-SEAT-ONE      PIC 99.
+       01  AVAILABLE-SEAT-TWO      PIC 99.
+       01  LOGIN-SUCCESS           PIC X.
+       01  RESERVE-ID-INPUT        PIC 9(4).
+       01  RESERVATION-VALID       PIC X.
+       01  IS-PROCEED              PIC 9.
+       01  IS-PROCEED-EVAL         PIC X.
+       01  CORRECT-ID              PIC X.
+       01  VIEW-RESERVE-BACK       PIC 9.
+       01  RESERVE-CONFIRM         PIC 9.
+       01  RESERVE-STOP            PIC X.
+       01  RESERVE-CONFIRM2        PIC 9.
+       01  RESERVE-STOP2           PIC X.
+       01  SELECT-REFRESH          PIC X.
+       01  SELECT-VIEW             PIC X.
+       01  YES-PAID                PIC X.
+       01  YES-UNPAID              PIC X.
+       01  REGISTER-CHECK          PIC X.
+       01  LOGIN-HAVE-DATA         PIC 9.
+       01  WS-ECHOICE              PIC 9.
+       01  WS-MOVIE-COUNTER        PIC 9 VALUE 0.
 
        PROCEDURE DIVISION.
        DATABASE-CONFIGURATION.
@@ -375,7 +381,7 @@
        MAIN-PARA.
            DISPLAY " ".
            DISPLAY "********************************************"
-           DISPLAY " WELCOME TO CINEMA SEAT RESERVATION SYSTEM!".
+           DISPLAY " WELCOME TO MOVIE TICKET RESERVATION SYSTEM".
            DISPLAY "********************************************"
            DISPLAY "I AM A/AN..."
            DISPLAY "1 - CUSTOMER".
@@ -430,11 +436,11 @@
            WS-MENU-CHOICE EQUAL 'c'
            DISPLAY " "
            DISPLAY "*****************************"
-           DISPLAY " WELCOME TO CUSTOMER PORTAL!"
+           DISPLAY " WELCOME TO CUSTOMER PORTAL"
            DISPLAY "*****************************"
            DISPLAY "A - REGISTER AN ACCOUNT"
            DISPLAY "B - LOGIN TO AN EXISTING ACCOUNT"
-           DISPLAY "C - EXIT"
+           DISPLAY "C - GO TO MAIN MENU"
            ACCEPT WS-MENU-CHOICE
            EVALUATE WS-MENU-CHOICE
                 WHEN 'A'
@@ -487,6 +493,7 @@
 
        REGISTER-PARA.
            MOVE 'N' TO REGISTER-CHECK
+           DISPLAY " "
            DISPLAY "*********************"
            DISPLAY " REGISTER AN ACCOUNT"
            DISPLAY "*********************"
@@ -524,8 +531,6 @@
            IF REGISTER-CHECK NOT EQUAL 'Y'
               DISPLAY "THIS USERNAME IS ALREADY TAKEN. PLEASE TRY"
               " AGAIN."
-           ELSE
-               DISPLAY " "
            END-IF
            END-PERFORM
 
@@ -549,6 +554,7 @@
            PERFORM UNTIL LOGIN-SUCCESS EQUAL 'Y'
            MOVE 'N' TO WS-EOF
            MOVE 'N' TO LOGIN-SUCCESS
+           DISPLAY " "
            DISPLAY "******************************"
            DISPLAY " LOGIN TO AN EXISTING ACCOUNT"
            DISPLAY "******************************"
@@ -675,29 +681,35 @@
            MOVE 'N' TO WS-EOF
            PERFORM COUNT-AVAILABLE-SEATS-ONE
            MOVE 'N' TO WS-EOF
-           DISPLAY "*********************"
-           DISPLAY " NOW SHOWING MOVIES!"
-           DISPLAY "*********************"
+           DISPLAY "**************************************"
+           DISPLAY " NOW SHOWING MOVIES AVAILABLE FOR YOU"
+           DISPLAY "**************************************"
            OPEN INPUT FD-MOVIES
            PERFORM UNTIL WS-EOF EQUAL 'Y'
                READ FD-MOVIES NEXT RECORD INTO WS-MOVIES
                    AT END MOVE 'Y' TO WS-EOF
                    NOT AT END
                    IF NOW-SHOWING-COUNT EQUAL 1
-           DISPLAY NOW-SHOWING-COUNT " - " WS-TITLE
+           DISPLAY NOW-SHOWING-COUNT " - " FUNCTION
+                       UPPER-CASE(WS-TITLE)
            DISPLAY "AVAILABLE SEATS: " AVAILABLE-SEAT-ONE
            DISPLAY "YEAR: " WS-RDATE
-           DISPLAY "RATED: " WS-RATINGS
-           DISPLAY "SYNOPSIS: " WS-SYNOPSIS
+           DISPLAY "MTRCB RATING: " FUNCTION
+                       UPPER-CASE(WS-RATINGS)
+           DISPLAY "SYNOPSIS: " FUNCTION
+                       UPPER-CASE(WS-SYNOPSIS)
            DISPLAY " "
            ADD 1 TO NOW-SHOWING-COUNT
            ELSE IF NOW-SHOWING-COUNT EQUAL 2
            PERFORM COUNT-AVAILABLE-SEATS-TWO
-           DISPLAY NOW-SHOWING-COUNT " - " WS-TITLE
+           DISPLAY NOW-SHOWING-COUNT " - " FUNCTION
+                       UPPER-CASE(WS-TITLE)
            DISPLAY "AVAILABLE SEATS: " AVAILABLE-SEAT-TWO
            DISPLAY "YEAR: " WS-RDATE
-           DISPLAY "RATED: " WS-RATINGS
-           DISPLAY "SYNOPSIS: " WS-SYNOPSIS
+           DISPLAY "MTRCB RATING: " FUNCTION
+                       UPPER-CASE(WS-RATINGS)
+           DISPLAY "SYNOPSIS: " FUNCTION
+                       UPPER-CASE(WS-SYNOPSIS)
            END-IF
            END-READ
            END-PERFORM
@@ -710,7 +722,7 @@
            PERFORM UNTIL STOPER EQUAL 'Y'
            ACCEPT CUSTOMER-CHOOSE-MOVIE
 
-      *----IF USER CHOOSE MOVIE----
+      *----IF USER CHOOSES MOVIE----
            IF CUSTOMER-CHOOSE-MOVIE EQUAL 1
            MOVE 'N' TO WS-EOF
            OPEN INPUT FD-MOVIES
@@ -735,26 +747,28 @@
            EVALUATE CUSTOMER-CHOOSE-MOVIE
            WHEN 1 PERFORM NOW-SHOWING-ONE
                   MOVE 'Y' TO STOPER
+                  DISPLAY "SEAT RESERVATION SUCCESS!"
            WHEN 2 PERFORM NOW-SHOWING-TWO
                   MOVE 'Y' TO STOPER
+                  DISPLAY "SEAT RESERVATION SUCCESS!"
            WHEN 3 MOVE 'Y' TO STOPER
-           EXIT PARAGRAPH
            WHEN OTHER PERFORM DEFAULT-PARA
            END-EVALUATE
            END-PERFORM
 
            MOVE 'N' TO WS-EOF
-           MOVE 'N' TO STOPER
-           DISPLAY "SEAT RESERVATION SUCCESS!".
+           MOVE 'N' TO STOPER.
 
        NOW-SHOWING-ONE.
            MOVE 'N' TO SEAT-VALID
            MOVE 'N' TO WS-EOF
-           DISPLAY "SELECTED MOVIE: " WS-TITLE
+           DISPLAY " "
+           DISPLAY "SELECTED MOVIE: " FUNCTION
+                       UPPER-CASE(WS-TITLE)
            MOVE 'N' TO WS-EOF
-           DISPLAY "********************"
-           DISPLAY " CINEMA SEAT LAYOUT"
-           DISPLAY "********************"
+           DISPLAY "**********************"
+           DISPLAY " CINEMA 1 SEAT LAYOUT"
+           DISPLAY "**********************"
            DISPLAY "  A B C D E F G H I J"
            OPEN INPUT FD-LAYOUT
            PERFORM UNTIL WS-EOF EQUAL 'Y'
@@ -812,11 +826,13 @@
        NOW-SHOWING-TWO.
            MOVE 'N' TO SEAT-VALID
            MOVE 'N' TO WS-EOF
-           DISPLAY "SELECTED MOVIE: " WS-TITLE
+           DISPLAY " "
+           DISPLAY "SELECTED MOVIE: " FUNCTION
+                       UPPER-CASE(WS-TITLE)
            MOVE 'N' TO WS-EOF
-           DISPLAY "********************"
-           DISPLAY " CINEMA SEAT LAYOUT"
-           DISPLAY "********************"
+           DISPLAY "**********************"
+           DISPLAY " CINEMA SEAT 2 LAYOUT"
+           DISPLAY "**********************"
            DISPLAY "  A B C D E F G H I J"
            OPEN INPUT FD-LAYOUT1
            PERFORM UNTIL WS-EOF EQUAL 'Y'
@@ -887,10 +903,11 @@
            END-PERFORM
            CLOSE FD-RESERVEDSEAT
            MOVE 'N' TO WS-EOF
-           DISPLAY "***************"
-           DISPLAY " CUSTOMER HOME"
-           DISPLAY "***************"
-           DISPLAY "WELCOME, "WS-FNAME" "
+           DISPLAY " "
+           DISPLAY "******************************************"
+           DISPLAY " MOVIE TICKET RESERVATION - CUSTOMER MENU"
+           DISPLAY "******************************************"
+           DISPLAY "WELCOME, "FUNCTION UPPER-CASE(WS-FNAME)
            DISPLAY "A - RESERVE A SEAT"
            DISPLAY "B - VIEW RESERVED SEATS"
            DISPLAY "C - CANCEL RESERVED SEAT"
@@ -911,6 +928,10 @@
 
        CHOOSE-VIEW.
            PERFORM UNTIL SELECT-REFRESH EQUAL 'Y'
+           DISPLAY " "
+           DISPLAY "************************"
+           DISPLAY " VIEW MY RESERVED SEATS"
+           DISPLAY "************************"
            DISPLAY "1 - VIEW PAID RESERVATIONS"
            DISPLAY "2 - VIEW UNPAID RESERVATIONS"
            DISPLAY "0 - BACK"
@@ -937,24 +958,25 @@
                    IF WS-ACCID EQUAL WS-CUSTOMER-ID
                        AND WS-RESERVE-STATUS EQUAL 'UNPAID'
                        MOVE 'Y' TO YES-UNPAID
+                       DISPLAY " "
                        DISPLAY "RESERVATION ID: " WS-SEATID
                        DISPLAY "DATE OF RESERVATION: " WS-DATE-RESERVED
                        DISPLAY "TIME OF RESERVATION: " WS-TIME-RESERVED
                        DISPLAY "SEAT NUMBER: "
-                       WS-LAYOUT-NUM WS-SEATNUMBER
+                       WS-LAYOUT-NUM FUNCTION
+                       UPPER-CASE(WS-SEATNUMBER)
                        DISPLAY "CINEMA: " WS-CINEMA-NUM
-                       DISPLAY "TITLE: " WS-MOVIE-TITLE
-                       DISPLAY "STATUS: " WS-RESERVE-STATUS
-                       DISPLAY " "
+                       DISPLAY "TITLE: " FUNCTION
+                       UPPER-CASE(WS-MOVIE-TITLE)
+                       DISPLAY "STATUS: " FUNCTION
+                       UPPER-CASE(WS-RESERVE-STATUS)
                    END-IF
                END-READ
            END-PERFORM
            IF YES-UNPAID NOT EQUAL 'Y'
                DISPLAY "YOU HAVE NO ANY UNPAID RESERVATIONS YET."
            END-IF.
-
            CLOSE FD-RESERVEDSEAT.
-
 
        VIEW-RESERVE-TICKET.
            MOVE 'N' TO WS-EOF
@@ -966,15 +988,18 @@
                    IF WS-ACCID EQUAL WS-CUSTOMER-ID
                        AND WS-RESERVE-STATUS EQUAL 'UNPAID'
                        MOVE 'Y' TO YES-UNPAID
+                       DISPLAY " "
                        DISPLAY "RESERVATION ID: " WS-SEATID
                        DISPLAY "DATE OF RESERVATION: " WS-DATE-RESERVED
                        DISPLAY "TIME OF RESERVATION: " WS-TIME-RESERVED
                        DISPLAY "SEAT NUMBER: "
-                       WS-LAYOUT-NUM WS-SEATNUMBER
+                       WS-LAYOUT-NUM FUNCTION
+                       UPPER-CASE(WS-SEATNUMBER)
                        DISPLAY "CINEMA: " WS-CINEMA-NUM
-                       DISPLAY "TITLE: " WS-MOVIE-TITLE
-                       DISPLAY "STATUS: " WS-RESERVE-STATUS
-                       DISPLAY " "
+                       DISPLAY "TITLE: " FUNCTION
+                       UPPER-CASE(WS-MOVIE-TITLE)
+                       DISPLAY "STATUS: " FUNCTION
+                       UPPER-CASE(WS-RESERVE-STATUS)
                    END-IF
                END-READ
            END-PERFORM
@@ -998,10 +1023,13 @@
                        DISPLAY "DATE OF RESERVATION: " WS-DATE-RESERVED
                        DISPLAY "TIME OF RESERVATION: " WS-TIME-RESERVED
                        DISPLAY "SEAT NUMBER: "
-                       WS-LAYOUT-NUM WS-SEATNUMBER
+                       WS-LAYOUT-NUM FUNCTION
+                       UPPER-CASE(WS-SEATNUMBER)
                        DISPLAY "CINEMA: " WS-CINEMA-NUM
-                       DISPLAY "TITLE: " WS-MOVIE-TITLE
-                       DISPLAY "STATUS: " WS-RESERVE-STATUS
+                       DISPLAY "TITLE: " FUNCTION
+                       UPPER-CASE(WS-MOVIE-TITLE)
+                       DISPLAY "STATUS: " FUNCTION
+                       UPPER-CASE(WS-RESERVE-STATUS)
                        DISPLAY " "
                    END-IF
                END-READ
@@ -1058,6 +1086,7 @@
            MOVE 'N' TO WS-EOF
            MOVE 'N' TO RESERVATION-VALID
            MOVE 'N' TO CORRECT-ID
+           DISPLAY " "
            DISPLAY "*************************"
            DISPLAY " CANCEL SEAT RESERVATION"
            DISPLAY "*************************"
@@ -1225,7 +1254,7 @@
 
            IF SEAT-NUMBER-INPUT EQUAL 'A' OR SEAT-NUMBER-INPUT EQUAL 'a'
                IF WS-COL0 EQUAL 'X'
-                   DISPLAY "ERROR. THIS SEAT IS ALREADY TAKEN. CHOOSE"
+                   DISPLAY "THIS SEAT IS ALREADY TAKEN. CHOOSE"
                    " ANOTHER AVAILABLE SEAT!"
                ELSE
                MOVE 'Y' TO SEAT-VALID
@@ -1233,7 +1262,7 @@
          ELSE IF SEAT-NUMBER-INPUT EQUAL 'B' or
              SEAT-NUMBER-INPUT EQUAL 'b'
                IF COL1 EQUAL 'X'
-                   DISPLAY "ERROR. THIS SEAT IS ALREADY TAKEN. CHOOSE"
+                   DISPLAY "THIS SEAT IS ALREADY TAKEN. CHOOSE"
                    " ANOTHER AVAILABLE SEAT!"
                ELSE
                MOVE 'Y' TO SEAT-VALID
@@ -1241,7 +1270,7 @@
            ELSE IF SEAT-NUMBER-INPUT EQUAL 'C' OR
                SEAT-NUMBER-INPUT EQUAL 'c'
                IF COL2 EQUAL 'X'
-                   DISPLAY "ERROR. THIS SEAT IS ALREADY TAKEN. CHOOSE"
+                   DISPLAY "THIS SEAT IS ALREADY TAKEN. CHOOSE"
                    " ANOTHER AVAILABLE SEAT!"
                ELSE
                MOVE 'Y' TO SEAT-VALID
@@ -1249,7 +1278,7 @@
            ELSE IF SEAT-NUMBER-INPUT EQUAL 'D' OR
                SEAT-NUMBER-INPUT EQUAL 'd'
                IF COL3 EQUAL 'X'
-                   DISPLAY "ERROR. THIS SEAT IS ALREADY TAKEN. CHOOSE"
+                   DISPLAY "THIS SEAT IS ALREADY TAKEN. CHOOSE"
                    " ANOTHER AVAILABLE SEAT!"
                ELSE
                MOVE 'Y' TO SEAT-VALID
@@ -1257,7 +1286,7 @@
            ELSE IF SEAT-NUMBER-INPUT EQUAL 'E' OR
                SEAT-NUMBER-INPUT EQUAL 'e'
                IF COL4 EQUAL 'X'
-                   DISPLAY "ERROR. THIS SEAT IS ALREADY TAKEN. CHOOSE"
+                   DISPLAY "THIS SEAT IS ALREADY TAKEN. CHOOSE"
                    " ANOTHER AVAILABLE SEAT!"
                ELSE
                MOVE 'Y' TO SEAT-VALID
@@ -1265,7 +1294,7 @@
            ELSE IF SEAT-NUMBER-INPUT EQUAL 'F' OR
                SEAT-NUMBER-INPUT EQUAL 'f'
                IF COL5 EQUAL 'X'
-                   DISPLAY "ERROR. THIS SEAT IS ALREADY TAKEN. CHOOSE"
+                   DISPLAY "THIS SEAT IS ALREADY TAKEN. CHOOSE"
                    " ANOTHER AVAILABLE SEAT!"
                ELSE
                MOVE 'Y' TO SEAT-VALID
@@ -1273,7 +1302,7 @@
            ELSE IF SEAT-NUMBER-INPUT EQUAL 'G' OR
                SEAT-NUMBER-INPUT EQUAL 'g'
                IF COL6 EQUAL 'X'
-                   DISPLAY "ERROR. THIS SEAT IS ALREADY TAKEN. CHOOSE"
+                   DISPLAY "THIS SEAT IS ALREADY TAKEN. CHOOSE"
                    " ANOTHER AVAILABLE SEAT!"
                ELSE
                MOVE 'Y' TO SEAT-VALID
@@ -1281,7 +1310,7 @@
            ELSE IF SEAT-NUMBER-INPUT EQUAL 'H' OR
                SEAT-NUMBER-INPUT EQUAL 'h'
                IF COL7 EQUAL 'X'
-                   DISPLAY "ERROR. THIS SEAT IS ALREADY TAKEN. CHOOSE"
+                   DISPLAY "THIS SEAT IS ALREADY TAKEN. CHOOSE"
                    " ANOTHER AVAILABLE SEAT!"
                ELSE
                MOVE 'Y' TO SEAT-VALID
@@ -1289,7 +1318,7 @@
            ELSE IF SEAT-NUMBER-INPUT EQUAL 'I' OR
                SEAT-NUMBER-INPUT EQUAL 'i'
                IF COL8 EQUAL 'X'
-                   DISPLAY "ERROR. THIS SEAT IS ALREADY TAKEN. CHOOSE"
+                   DISPLAY "THIS SEAT IS ALREADY TAKEN. CHOOSE"
                    " ANOTHER AVAILABLE SEAT!"
                ELSE
                MOVE 'Y' TO SEAT-VALID
@@ -1297,7 +1326,7 @@
            ELSE IF SEAT-NUMBER-INPUT EQUAL 'J' OR
                SEAT-NUMBER-INPUT EQUAL 'j'
                IF COL9 EQUAL 'X'
-                   DISPLAY "ERROR. THIS SEAT IS ALREADY TAKEN. CHOOSE"
+                   DISPLAY "THIS SEAT IS ALREADY TAKEN. CHOOSE"
                    " ANOTHER AVAILABLE SEAT!"
                ELSE
                MOVE 'Y' TO SEAT-VALID
@@ -1312,13 +1341,13 @@
            MOVE SEAT-KEY-INPUT TO SEAT-KEY1.
            READ FD-LAYOUT1 RECORD INTO WS-LAYOUT
            KEY IS SEAT-KEY1
-           INVALID KEY DISPLAY 'INVALID SEAT'
+           INVALID KEY DISPLAY 'ERROR! INVALID SEAT!'
            END-READ.
            CLOSE FD-LAYOUT1.
 
            IF SEAT-NUMBER-INPUT EQUAL 'A' OR SEAT-NUMBER-INPUT EQUAL 'a'
                IF COL01 EQUAL 'X'
-                   DISPLAY "ERROR. THIS SEAT IS ALREADY TAKEN. CHOOSE"
+                   DISPLAY "THIS SEAT IS ALREADY TAKEN. CHOOSE"
                    " ANOTHER AVAILABLE SEAT!"
                 ELSE
                MOVE 'Y' TO SEAT-VALID
@@ -1326,7 +1355,7 @@
            ELSE IF SEAT-NUMBER-INPUT EQUAL 'B' OR
                SEAT-NUMBER-INPUT EQUAL 'b'
                IF COL11 EQUAL 'X'
-                   DISPLAY "ERROR. THIS SEAT IS ALREADY TAKEN. CHOOSE"
+                   DISPLAY "THIS SEAT IS ALREADY TAKEN. CHOOSE"
                    " ANOTHER AVAILABLE SEAT!"
                ELSE
                MOVE 'Y' TO SEAT-VALID
@@ -1334,7 +1363,7 @@
            ELSE IF SEAT-NUMBER-INPUT EQUAL 'C' OR
                SEAT-NUMBER-INPUT EQUAL 'c'
                IF COL21 EQUAL 'X'
-                   DISPLAY "ERROR. THIS SEAT IS ALREADY TAKEN. CHOOSE"
+                   DISPLAY "THIS SEAT IS ALREADY TAKEN. CHOOSE"
                    " ANOTHER AVAILABLE SEAT!"
                ELSE
                MOVE 'Y' TO SEAT-VALID
@@ -1342,7 +1371,7 @@
            ELSE IF SEAT-NUMBER-INPUT EQUAL 'D' OR
                SEAT-NUMBER-INPUT EQUAL 'd'
                IF COL31 EQUAL 'X'
-                   DISPLAY "ERROR. THIS SEAT IS ALREADY TAKEN. CHOOSE"
+                   DISPLAY "THIS SEAT IS ALREADY TAKEN. CHOOSE"
                    " ANOTHER AVAILABLE SEAT!"
                ELSE
                MOVE 'Y' TO SEAT-VALID
@@ -1350,7 +1379,7 @@
            ELSE IF SEAT-NUMBER-INPUT EQUAL 'E' OR
                SEAT-NUMBER-INPUT EQUAL 'e'
                IF COL41 EQUAL 'X'
-                   DISPLAY "ERROR. THIS SEAT IS ALREADY TAKEN. CHOOSE"
+                   DISPLAY "THIS SEAT IS ALREADY TAKEN. CHOOSE"
                    " ANOTHER AVAILABLE SEAT!"
                ELSE
                MOVE 'Y' TO SEAT-VALID
@@ -1358,7 +1387,7 @@
            ELSE IF SEAT-NUMBER-INPUT EQUAL 'F' OR
                SEAT-NUMBER-INPUT EQUAL 'f'
                IF COL51 EQUAL 'X'
-                   DISPLAY "ERROR. THIS SEAT IS ALREADY TAKEN. CHOOSE"
+                   DISPLAY "THIS SEAT IS ALREADY TAKEN. CHOOSE"
                    " ANOTHER AVAILABLE SEAT!"
                ELSE
                MOVE 'Y' TO SEAT-VALID
@@ -1366,7 +1395,7 @@
            ELSE IF SEAT-NUMBER-INPUT EQUAL 'G' OR
                SEAT-NUMBER-INPUT EQUAL 'g'
                IF COL61 EQUAL 'X'
-                   DISPLAY "ERROR. THIS SEAT IS ALREADY TAKEN. CHOOSE"
+                   DISPLAY "THIS SEAT IS ALREADY TAKEN. CHOOSE"
                    " ANOTHER AVAILABLE SEAT!"
                ELSE
                MOVE 'Y' TO SEAT-VALID
@@ -1374,7 +1403,7 @@
            ELSE IF SEAT-NUMBER-INPUT EQUAL 'H' OR
                SEAT-NUMBER-INPUT EQUAL 'h'
                IF COL71 EQUAL 'X'
-                   DISPLAY "ERROR. THIS SEAT IS ALREADY TAKEN. CHOOSE"
+                   DISPLAY "THIS SEAT IS ALREADY TAKEN. CHOOSE"
                    " ANOTHER AVAILABLE SEAT!"
                ELSE
                MOVE 'Y' TO SEAT-VALID
@@ -1382,7 +1411,7 @@
            ELSE IF SEAT-NUMBER-INPUT EQUAL 'I' OR
                SEAT-NUMBER-INPUT EQUAL 'i'
                IF COL81 EQUAL 'X'
-                   DISPLAY "ERROR. THIS SEAT IS ALREADY TAKEN. CHOOSE"
+                   DISPLAY "THIS SEAT IS ALREADY TAKEN. CHOOSE"
                    " ANOTHER AVAILABLE SEAT!"
                ELSE
                MOVE 'Y' TO SEAT-VALID
@@ -1390,7 +1419,7 @@
            ELSE IF SEAT-NUMBER-INPUT EQUAL 'J' OR
                SEAT-NUMBER-INPUT EQUAL 'j'
                IF COL91 EQUAL 'X'
-                   DISPLAY "ERROR. THIS SEAT IS ALREADY TAKEN. CHOOSE"
+                   DISPLAY "THIS SEAT IS ALREADY TAKEN. CHOOSE"
                    " ANOTHER AVAILABLE SEAT!"
                ELSE
                MOVE 'Y' TO SEAT-VALID
@@ -1467,12 +1496,6 @@
                DISPLAY "ERROR! INVALID INPUT!"
            END-IF.
 
-       DEFAULT-PARA.
-           DISPLAY "ERROR! INVALID INPUT!".
-
-       EXIT-PARA.
-           STOP RUN.
-
        ADMIN-REG.
            DISPLAY " ".
            DISPLAY "**********************"
@@ -1505,19 +1528,20 @@
            DISPLAY "ADMIN ACCOUNT SUCESSFULLY CREATED. PLEASE TAKE NOTE"
            " OF YOUR ACCOUNT DETAILS:".
            DISPLAY "ACCOUNT ID     : "FA-ACCID" ".
-           DISPLAY "ACCOUNT HOLDER : ADMIN "FA-LNAME", "FA-FNAME" ".
+           DISPLAY "ACCOUNT HOLDER : ADMIN "FUNCTION
+           UPPER-CASE(FA-LNAME) FUNCTION UPPER-CASE(FA-FNAME)
            DISPLAY "PASSCODE       : "FA-PASSCODE" ".
            CLOSE FD-ADMIN
            GO TO ADMIN-PARA.
 
        ADMIN-LOGIN.
            DISPLAY " ".
-           DISPLAY "*************"
-           DISPLAY " ADMIN LOGIN".
-           DISPLAY "*************"
-           DISPLAY "ACCOUNT ID: "
+           DISPLAY "*******************"
+           DISPLAY " LOGIN AS AN ADMIN".
+           DISPLAY "*******************"
+           DISPLAY "ACCOUNT ID:"
            ACCEPT FA-ACCID
-           DISPLAY "PASSCODE: "
+           DISPLAY "PASSCODE:"
            ACCEPT FA-PASSCODE
 
            MOVE FA-PASSCODE TO WS-PASSCODE-TEMP
@@ -1553,10 +1577,10 @@
 
        ADMIN-MENU.
            DISPLAY " ".
-           DISPLAY "************"
-           DISPLAY " ADMIN MENU"
-           DISPLAY "************"
-           DISPLAY "WELCOME BACK, ADMIN "FA-FNAME" ".
+           DISPLAY "***************************************"
+           DISPLAY " MOVIE TICKET RESERVATION - ADMIN MENU"
+           DISPLAY "***************************************"
+           DISPLAY "WELCOME BACK, ADMIN "FUNCTION UPPER-CASE(FA-FNAME).
            DISPLAY "1 - MOVIE SETTINGS".
            DISPLAY "2 - EMPLOYEE SETTINGS".
            DISPLAY "3 - LOGOUT".
@@ -1564,10 +1588,10 @@
 
            IF WS-CHOICE = 1 THEN
                DISPLAY " "
-               DISPLAY "****************"
-               DISPLAY " MOVIE SETTINGS"
-               DISPLAY "****************"
-               DISPLAY "1 - ADD A MOVIE"
+               DISPLAY "**************************"
+               DISPLAY " MOVIE SETTINGS FOR ADMIN"
+               DISPLAY "**************************"
+               DISPLAY "1 - ADD A NOW SHOWING MOVIE"
                DISPLAY "2 - REMOVE A MOVIE"
                DISPLAY "3 - VIEW LIST OF MOVIES"
                DISPLAY "4 - BACK"
@@ -1587,9 +1611,9 @@
 
            ELSE IF WS-CHOICE = 2 THEN
                DISPLAY " "
-               DISPLAY "*******************"
-               DISPLAY " EMPLOYEE SETTINGS"
-               DISPLAY "*******************"
+               DISPLAY "*****************************"
+               DISPLAY " EMPLOYEE SETTINGS FOR ADMIN"
+               DISPLAY "*****************************"
                DISPLAY "1 - ADD EMPLOYEE"
                DISPLAY "2 - REMOVE EMPLOYEE"
                DISPLAY "3 - VIEW LIST OF EMPLOYEES"
@@ -1627,53 +1651,67 @@
            END-IF.
 
        NEW-MOVIES.
-           DISPLAY " ".
-           DISPLAY "***************"
-           DISPLAY " ADD NEW MOVIE".
-           DISPLAY "***************"
-       *> Movie code generator.
-           COMPUTE WS-CODE = FUNCTION RANDOM * (WS-MAX - WS-MIN + 1)
-               + WS-MIN.
-           MOVE WS-CODE TO WS-MOVIECODE
-       *> Additonal info needed for movie record
-           DISPLAY "MOVIE CODE         : ["WS-MOVIECODE"]"
-           DISPLAY "ENTER TITLE        : "
-           ACCEPT FM-TITLE
-           DISPLAY "ENTER RELEASE DATE : "
-           ACCEPT FM-RDATE
-           DISPLAY "ENTER RATINGS      : "
-           ACCEPT FM-RATINGS
-           DISPLAY "ENTER SYNOPSIS     : "
-           ACCEPT FM-SYNOPSIS
-
-           MOVE WS-MOVIECODE TO FM-MOVIECODE
-
-           OPEN I-O FD-MOVIES
-
-           IF WS-FILESTATUS = 35 THEN
-               OPEN OUTPUT FD-MOVIES
-           END-IF
-
-           WRITE FM-RECORD
+           MOVE 0 TO WS-MOVIE-COUNTER
+           OPEN INPUT FD-MOVIES.
+           PERFORM UNTIL WS-EOF = 'Y'
+              READ FD-MOVIES NEXT RECORD INTO WS-MOVIES
+                   AT END MOVE 'Y' TO WS-EOF
+                   NOT AT END
+                   COMPUTE WS-MOVIE-COUNTER = WS-MOVIE-COUNTER + 1
+              END-READ
+           END-PERFORM.
            CLOSE FD-MOVIES
+           MOVE 'N' TO WS-EOF
 
-           DISPLAY " "
-           DISPLAY "MOVIE SUCCESSFULLY ADDED!"
+           IF WS-MOVIE-COUNTER IS NOT GREATER THAN 1
+               DISPLAY " "
+               DISPLAY "*****************************"
+               DISPLAY " ADD ADD A NOW SHOWING MOVIE"
+               DISPLAY "*****************************"
+           *> Movie code generator.
+               COMPUTE WS-CODE = FUNCTION RANDOM * (WS-MAX - WS-MIN + 1)
+                   + WS-MIN
+               MOVE WS-CODE TO WS-MOVIECODE
+           *> Additonal info needed for movie record
+               DISPLAY "MOVIE CODE: ["WS-MOVIECODE"]"
+               DISPLAY "ENTER TITLE: "
+               ACCEPT FM-TITLE
+               DISPLAY "ENTER RELEASE DATE: "
+               ACCEPT FM-RDATE
+               DISPLAY "ENTER MTRCB RATING (G, PG, SPG): "
+               ACCEPT FM-RATINGS
+               DISPLAY "ENTER SYNOPSIS (UP TO 800 CHARACTERS): "
+               ACCEPT FM-SYNOPSIS
+
+               MOVE WS-MOVIECODE TO FM-MOVIECODE
+               OPEN I-O FD-MOVIES
+                   IF WS-FILESTATUS = 35 THEN
+                       OPEN OUTPUT FD-MOVIES
+                   END-IF
+
+               WRITE FM-RECORD
+               CLOSE FD-MOVIES
+
+               DISPLAY " "
+               DISPLAY "MOVIE SUCCESSFULLY ADDED!"
+
+           ELSE
+                DISPLAY "OPERATION FAILED! REACHED MAXIMUM NUMBER OF"
+                " ALLOWABLE MOVIES TO BE ADDED!"
+           END-IF
+           CLOSE FD-MOVIES
            GO TO ADMIN-MENU.
-
 
        NO-MOVIES.
            DISPLAY " ".
-           DISPLAY "****************"
-           DISPLAY " REMOVE A MOVIE".
-           DISPLAY "****************"
-           DISPLAY "ENTER MOVIE CODE: "
+           DISPLAY "**************************"
+           DISPLAY " REMOVE AN EXISTING MOVIE".
+           DISPLAY "**************************"
+           DISPLAY "ENTER MOVIE CODE:"
            ACCEPT FM-MOVIECODE
 
            OPEN I-O FD-MOVIES.
-
            READ FD-MOVIES
-
            DELETE FD-MOVIES RECORD
                NOT INVALID KEY DISPLAY "MOVIE SUCCESFULLY REMOVED!"
                INVALID KEY DISPLAY "NO MOVIE FOUND!"
@@ -1683,18 +1721,19 @@
 
        VIEW-MOVIES.
            DISPLAY " ".
-           DISPLAY "****************"
-           DISPLAY " LIST OF MOVIES"
-           DISPLAY "****************"
+           DISPLAY "********************"
+           DISPLAY " LIST OF ALL MOVIES"
+           DISPLAY "********************"
            OPEN INPUT FD-MOVIES.
            PERFORM UNTIL WS-EOF = 'Y'
               READ FD-MOVIES NEXT RECORD INTO WS-MOVIES
                    AT END MOVE 'Y' TO WS-EOF
                    NOT AT END
                        DISPLAY "MOVIE CODE  : ["WS-MOVIECODE"]"
-                       DISPLAY "MOVIE TITLE : "WS-TITLE" "
+                       DISPLAY "MOVIE TITLE : "FUNCTION
+                       UPPER-CASE(WS-TITLE)
+                       DISPLAY " "
               END-READ
-
            END-PERFORM.
            CLOSE FD-MOVIES.
 
@@ -1703,9 +1742,9 @@
 
        NEW-EMPLOYEE.
            DISPLAY " ".
-           DISPLAY "******************"
-           DISPLAY " ADD NEW EMPLOYEE".
-           DISPLAY "******************"
+           DISPLAY "*************************"
+           DISPLAY " REGISTER A NEW EMPLOYEE".
+           DISPLAY "*************************"
            DISPLAY "ENTER FIRST NAME: "
            ACCEPT FE-FNAME
            DISPLAY "ENTER LAST NAME: "
@@ -1716,42 +1755,37 @@
            ACCEPT FE-PASSCODE
 
            MOVE FUNCTION CURRENT-DATE to WS-GENERATE-DATA
-
            MOVE WS-TIME TO FE-ACCID.
-
            COMPUTE FE-ACCID = FUNCTION RANDOM(WS-DATE) * FE-ACCID.
 
-           DISPLAY "Account ID: ["FE-ACCID"]"
+           DISPLAY "ACCOUNT ID: ["FE-ACCID"]"
 
            OPEN I-O FD-EMPLOYEES
-
            IF WS-FILESTATUS = 35 THEN
                OPEN OUTPUT FD-EMPLOYEES
            END-IF
-
            WRITE FE-ACCOUNT
 
 `          DISPLAY " ".
            DISPLAY "EMPLOYEE ACCOUNT SUCESSFULLY CREATED. PLEASE TAKE"
            " NOTE OF EMPLOYEE'S ACCOUNT DETAILS: ".
            DISPLAY "ACCOUNT ID     : "FE-ACCID" ".
-           DISPLAY "ACCOUNT HOLDER : "FE-LNAME", "FE-FNAME" ".
+           DISPLAY "ACCOUNT HOLDER : "FUNCTION UPPER-CASE(FE-LNAME)
+                                      FUNCTION UPPER-CASE(FE-FNAME).
            DISPLAY "POST           : "FE-POSITION" ".
            CLOSE FD-EMPLOYEES
            GO TO ADMIN-MENU.
 
        DEL-EMPLOYEE.
            DISPLAY " ".
-           DISPLAY "********************"
-           DISPLAY " REMOVE AN EMPLOYEE".
-           DISPLAY "********************"
+           DISPLAY "*****************************"
+           DISPLAY " REMOVE AN EXISTING EMPLOYEE".
+           DISPLAY "*****************************"
            DISPLAY "ENTER EMPLOYEE'S ACCOUNT ID:".
            ACCEPT FE-ACCID
 
            OPEN I-O FD-EMPLOYEES.
-
            READ FD-EMPLOYEES
-
            DELETE FD-EMPLOYEES RECORD
                NOT INVALID KEY DISPLAY "EMPLOYEE REMOVED!"
                INVALID KEY DISPLAY "ERROR! INVALID ACCOUNT ID!"
@@ -1761,9 +1795,9 @@
 
        VIEW-EMPLOYEE.
            DISPLAY " ".
-           DISPLAY "*******************"
-           DISPLAY " LIST OF EMPLOYEES".
-           DISPLAY "*******************"
+           DISPLAY "***********************"
+           DISPLAY " LIST OF ALL EMPLOYEES".
+           DISPLAY "***********************"
            OPEN INPUT FD-EMPLOYEES.
            MOVE 'N' TO WS-EOF.
            PERFORM UNTIL WS-EOF = 'Y'
@@ -1772,20 +1806,20 @@
                    NOT AT END
                        DISPLAY " "
                        DISPLAY "EMPLOYEE ACCOUNT ID   : "WSA-ACCID" "
-                       DISPLAY "EMPLOYEE NAME         : "WSA-LNAME" "
+                       DISPLAY "EMPLOYEE NAME         : "
+                       FUNCTION UPPER-CASE(WSA-LNAME)
                        DISPLAY "EMPLOYEE POST NUMBER  : "WSA-POSITION" "
               END-READ
            END-PERFORM.
            CLOSE FD-EMPLOYEES.
-
            MOVE 'N' TO WS-EOF
            GO TO ADMIN-MENU.
 
        EMPLOYEE-PARA.
            DISPLAY " ".
-           DISPLAY "*********************************"
-           DISPLAY " WELCOME TO THE EMPLOYEE PORTAL!".
-           DISPLAY "*********************************"
+           DISPLAY "****************************"
+           DISPLAY " WELCOME TO EMPLOYEE PORTAL".
+           DISPLAY "****************************"
            DISPLAY "1 - LOGIN".
            DISPLAY "2 - GO BACK TO MENU".
            ACCEPT WS-ECHOICE.
@@ -1801,9 +1835,9 @@
 
        EMPLOYEE-LOGIN.
            DISPLAY " ".
-           DISPLAY "****************"
-           DISPLAY " EMPLOYEE LOGIN".
-           DISPLAY "****************"
+           DISPLAY "**********************"
+           DISPLAY " LOGIN AS AN EMPLOYEE".
+           DISPLAY "**********************"
            DISPLAY "ACCOUNT ID: "
            ACCEPT FE-ACCID
            DISPLAY "PASSCODE (E.G. 1234): "
@@ -1843,10 +1877,11 @@
 
        EMPLOYEE-MENU.
            DISPLAY " ".
-           DISPLAY "***************"
-           DISPLAY " EMPLOYEE MENU"
-           DISPLAY "***************"
-           DISPLAY "WELCOME BACK, EMPLOYEE "FE-FNAME" ".
+           DISPLAY "******************************************"
+           DISPLAY " MOVIE TICKET RESERVATION - EMPLOYEE MENU"
+           DISPLAY "******************************************"
+           DISPLAY "WELCOME BACK, EMPLOYEE " FUNCTION
+                    UPPER-CASE(FE-FNAME)
            DISPLAY "1 - VIEW TICKET DETAILS".
            DISPLAY "2 - CONFIRM PAYMENT".
            DISPLAY "3 - LOGOUT".
@@ -1868,13 +1903,14 @@
               READ FD-MOVIES NEXT RECORD INTO WS-MOVIES
                    AT END MOVE 'Y' TO WS-EOF
                    NOT AT END
+                       DISPLAY " "
                        DISPLAY "MOVIE CODE  : ["WS-MOVIECODE"]"
-                       DISPLAY "MOVIE TITLE : "WS-TITLE" "
+                       DISPLAY "MOVIE TITLE : "FUNCTION
+                       UPPER-CASE(WS-TITLE)
               END-READ
-           DISPLAY " "
-           DISPLAY "********************"
-           DISPLAY " CINEMA SEAT LAYOUT"
-           DISPLAY "********************"
+           DISPLAY "**********************"
+           DISPLAY " CINEMA 1 SEAT LAYOUT"
+           DISPLAY "**********************"
            DISPLAY "  A B C D E F G H I J"
            OPEN INPUT FD-LAYOUT
            PERFORM UNTIL WS-EOF EQUAL 'Y'
@@ -1893,16 +1929,17 @@
            READ FD-MOVIES NEXT RECORD INTO WS-MOVIES
                    AT END MOVE 'Y' TO WS-EOF
                    NOT AT END
+                       DISPLAY " "
                        DISPLAY "MOVIE CODE  : ["WS-MOVIECODE"]"
-                       DISPLAY "MOVIE TITLE : "WS-TITLE" "
+                       DISPLAY "MOVIE TITLE : "
+                       FUNCTION UPPER-CASE(WS-TITLE)
               END-READ
-           DISPLAY " "
 
            MOVE 'N' TO WS-EOF
 
-           DISPLAY "********************"
-           DISPLAY " CINEMA SEAT LAYOUT"
-           DISPLAY "********************"
+           DISPLAY "**********************"
+           DISPLAY " CINEMA 2 SEAT LAYOUT"
+           DISPLAY "**********************"
            DISPLAY "  A B C D E F G H I J"
            OPEN INPUT FD-LAYOUT1
            PERFORM UNTIL WS-EOF EQUAL 'Y'
@@ -1923,22 +1960,23 @@
            DISPLAY " "
            DISPLAY "INPUT RESERVATION ID:"
            ACCEPT SEATID
-
            OPEN I-O FD-RESERVEDSEAT
            IF WS-FILESTATUS IS NOT EQUAL TO 35 THEN
            READ FD-RESERVEDSEAT INTO WS-RESERVEDSEAT
                    KEY IS SEATID
                    NOT INVALID KEY
+                       DISPLAY " "
                        DISPLAY "CUSTOMER ID: " WS-CUSTOMER-ID
                        DISPLAY "RESERVATION ID: " WS-SEATID
                        DISPLAY "DATE OF RESERVATION: " WS-DATE-RESERVED
                        DISPLAY "TIME OF RESERVATION: " WS-TIME-RESERVED
                        DISPLAY "SEAT NUMBER: "
-                       WS-LAYOUT-NUM WS-SEATNUMBER
+                       WS-LAYOUT-NUM FUNCTION UPPER-CASE(WS-SEATNUMBER)
                        DISPLAY "CINEMA: " WS-CINEMA-NUM
-                       DISPLAY "TITLE: " WS-MOVIE-TITLE
-                       DISPLAY "STATUS: " WS-RESERVE-STATUS
-                       DISPLAY " "
+                       DISPLAY "TITLE: "
+                       FUNCTION UPPER-CASE(WS-MOVIE-TITLE)
+                       DISPLAY "STATUS: " FUNCTION
+                       UPPER-CASE(WS-RESERVE-STATUS)
                    INVALID KEY DISPLAY "INVALID RESERVATION ID!"
            ElSE
                DISPLAY "NO RECORD FOUND!"
@@ -1948,6 +1986,10 @@
            GO TO EMPLOYEE-MENU.
 
        PAY-CONFIRM.
+           DISPLAY " "
+           DISPLAY "*******************************"
+           DISPLAY " CUSTOMER PAYMENT CONFIRMATION"
+           DISPLAY "*******************************"
            DISPLAY "INPUT RESERVATION ID:"
            ACCEPT SEATID
 
@@ -1970,4 +2012,10 @@
            CLOSE FD-RESERVEDSEAT.
 
            GO TO EMPLOYEE-MENU
+           STOP RUN.
+
+       DEFAULT-PARA.
+           DISPLAY "ERROR! INVALID INPUT!".
+
+       EXIT-PARA.
            STOP RUN.
